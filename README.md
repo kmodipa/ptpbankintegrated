@@ -9,7 +9,7 @@ A simple solution that mimics a dashboard for a banking system. This dashboard i
 PTPBank.sln
 src/
   PTPBank.Domain/    # Entities, enums, factories, domain base types
-  PTPBank.Web/       # Razor Pages UI + EF Core + services
+  PTPBank.Web/       #EF Core + services
 Database/
   CreateSchema.sql   # SQL schema
 ```
