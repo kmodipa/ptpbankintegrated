@@ -1,0 +1,81 @@
+@using PTPBank.Domain.Enums
+@model AccountIndexViewModel
+@{
+    ViewData["Title"] = "Accounts";
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-wrap">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Persons" asp-action="Index">Persons</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Accounts</li>
+    </ol>
+</nav>
+
+<div class="surface-panel">
+    <form method="post" id="antiForgeryForm">@Html.AntiForgeryToken()</form>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <div>
+            <h1 class="page-title">Account Management</h1>
+            <p class="text-muted mb-0">Person Code: @Model.PersonId</p>
+        </div>
+        <div class="d-flex gap-2">
+            <a class="btn btn-primary" asp-controller="Accounts" asp-action="Create" asp-route-personId="@Model.PersonId">Open Account</a>
+            <a class="btn btn-outline-secondary" asp-controller="Persons" asp-action="Index">Back to Persons</a>
+        </div>
+    </div>
+
+    <table class="table table-striped app-table">
+        <thead>
+            <tr>
+                <th>Account Number</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th class="text-end">Balance (R)</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var account in Model.Accounts)
+        {
+            <tr>
+                <td>@account.AccountNumber</td>
+                <td>@account.AccountType</td>
+                <td>
+                    <span class="badge @(account.AccountStatus == AccountStatus.Open ? "bg-success" : "bg-danger")">
+                        @account.AccountStatus
+                    </span>
+                </td>
+                <td class="text-end">@account.OutstandingBalance.ToString("N2")</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-primary" asp-controller="Transactions" asp-action="Index" asp-route-accountId="@account.Code">View Transactions</a>
+                    @if (account.AccountStatus == AccountStatus.Open)
+                    {
+                        <button type="button" class="btn btn-sm btn-outline-warning js-close-account" data-id="@account.Code">Close</button>
+                    }
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+</div>
+
+@section Scripts {
+<script>
+    $(function() {
+        $('.js-close-account').on('click', function() {
+            const accountId = $(this).data('id');
+            $.ajax({
+                url: '/Accounts/Close',
+                method: 'POST',
+                data: {
+                    accountId: accountId,
+                    __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val()
+                },
+                success: function() { location.reload(); },
+                error: function(xhr) { alert(xhr.responseText || 'Status update failed'); }
+            });
+        });
+    });
+</script>
+}

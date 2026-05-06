@@ -1,12 +1,10 @@
 using FluentValidation;
 using PTPBank.Domain.Factories;
 using PTPBank.Web.Data;
-using PTPBank.Web.Data.Identity;
 using PTPBank.Web.Data.Repositories;
 using PTPBank.Web.Data.UnitOfWork;
 using PTPBank.Web.Services;
 using PTPBank.Web.Validators;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace PTPBank.Web.Extensions;
@@ -17,24 +15,6 @@ public static class ServiceCollectionExtensions
     {
         services.AddDbContext<ApplicationDbContext>(options =>
             options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
-
-        services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-        {
-            options.Password.RequiredLength = configuration.GetValue<int?>("Identity:Password:RequiredLength") ?? 6;
-            options.Password.RequireDigit = configuration.GetValue<bool?>("Identity:Password:RequireDigit") ?? true;
-            options.Password.RequireLowercase = configuration.GetValue<bool?>("Identity:Password:RequireLowercase") ?? true;
-            options.Password.RequireUppercase = configuration.GetValue<bool?>("Identity:Password:RequireUppercase") ?? true;
-            options.Password.RequireNonAlphanumeric = configuration.GetValue<bool?>("Identity:Password:RequireNonAlphanumeric") ?? false;
-        })
-        .AddEntityFrameworkStores<ApplicationDbContext>()
-        .AddDefaultTokenProviders();
-
-        services.ConfigureApplicationCookie(options =>
-        {
-            options.LoginPath = "/Account/Login";
-            options.AccessDeniedPath = "/Account/Login";
-            options.SlidingExpiration = true;
-        });
 
         services.AddScoped<IClientRepository, ClientRepository>();
         services.AddScoped<IAccountRepository, AccountRepository>();

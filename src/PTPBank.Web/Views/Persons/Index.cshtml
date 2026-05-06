@@ -1,0 +1,86 @@
+@model PersonIndexViewModel
+@{
+    ViewData["Title"] = "Persons";
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-wrap">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Persons</li>
+    </ol>
+</nav>
+
+<div class="surface-panel">
+    <form method="post" id="antiForgeryForm">@Html.AntiForgeryToken()</form>
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1 class="page-title">Person Management</h1>
+        <a class="btn btn-primary" asp-controller="Persons" asp-action="Create">Add Person</a>
+    </div>
+
+    <form method="get" asp-controller="Persons" asp-action="Index" class="row g-2 mb-3">
+        <div class="col-md-8">
+            <input type="text" name="search" value="@Model.Search" class="form-control" placeholder="Search by ID number, surname, or account number" />
+        </div>
+        <div class="col-md-4 d-flex gap-2">
+            <button class="btn btn-outline-primary" type="submit">Search</button>
+            <a class="btn btn-outline-secondary" asp-controller="Persons" asp-action="Index">Clear</a>
+        </div>
+    </form>
+
+    <table class="table table-striped app-table">
+        <thead>
+            <tr>
+                <th>ID Number</th>
+                <th>Name</th>
+                <th>Surname</th>
+                <th>Accounts</th>
+                <th class="text-end">Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach (var person in Model.Result.Items)
+        {
+            <tr>
+                <td>@person.IDNumber</td>
+                <td>@person.Name</td>
+                <td>@person.Surname</td>
+                <td>@person.AccountCount</td>
+                <td class="text-end">
+                    <a class="btn btn-sm btn-outline-primary" asp-controller="Persons" asp-action="Edit" asp-route-id="@person.Code">Edit</a>
+                    <a class="btn btn-sm btn-outline-success" asp-controller="Accounts" asp-action="Index" asp-route-personId="@person.Code">View Accounts</a>
+                    <button type="button" class="btn btn-sm btn-outline-danger js-delete-person" data-id="@person.Code">Delete</button>
+                </td>
+            </tr>
+        }
+        </tbody>
+    </table>
+
+    <nav>
+        <ul class="pagination">
+            @for (var p = 1; p <= Model.Result.TotalPages; p++)
+            {
+                <li class="page-item @(p == Model.Result.PageNumber ? "active" : "")">
+                    <a class="page-link" asp-controller="Persons" asp-action="Index" asp-route-currentPage="@p" asp-route-search="@Model.Search">@p</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>
+
+@section Scripts {
+<script>
+    $(function(){
+        $('.js-delete-person').on('click', function(){
+            if(!confirm('Delete this person?')) return;
+            const id = $(this).data('id');
+            $.ajax({
+                url: '/Persons/Delete/' + id,
+                method: 'POST',
+                data: { __RequestVerificationToken: $('input[name="__RequestVerificationToken"]').val() },
+                success: function(){ location.reload(); },
+                error: function(xhr){ alert(xhr.responseText || 'Delete failed'); }
+            });
+        });
+    });
+</script>
+}

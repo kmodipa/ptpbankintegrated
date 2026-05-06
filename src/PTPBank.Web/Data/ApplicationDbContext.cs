@@ -1,11 +1,9 @@
 using PTPBank.Domain.Entities;
-using PTPBank.Web.Data.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace PTPBank.Web.Data;
 
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : IdentityDbContext<ApplicationUser>(options)
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
     public DbSet<Client> Clients => Set<Client>();
     public DbSet<Account> Accounts => Set<Account>();

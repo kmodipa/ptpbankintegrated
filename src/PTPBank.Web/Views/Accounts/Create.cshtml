@@ -1,0 +1,49 @@
+@using PTPBank.Domain.Enums
+@model AccountFormViewModel
+@{
+    ViewData["Title"] = "Open Account";
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-wrap">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Persons" asp-action="Index">Persons</a></li>
+        <li class="breadcrumb-item"><a asp-controller="Accounts" asp-action="Index" asp-route-personId="@Model.ClientCode">Accounts</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Open Account</li>
+    </ol>
+</nav>
+
+<div class="surface-panel form-panel">
+    <h1 class="page-title">Open Account</h1>
+    <p class="text-muted">Person Code: @Model.ClientCode</p>
+
+    <form method="post" id="openAccountForm" asp-controller="Accounts" asp-action="Create">
+        <input type="hidden" asp-for="ClientCode" />
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+        <div class="mb-3">
+            <label asp-for="AccountNumber" class="form-label"></label>
+            <input asp-for="AccountNumber" class="form-control" />
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="AccountType" class="form-label"></label>
+            <select asp-for="AccountType" class="form-select" asp-items="Html.GetEnumSelectList<AccountType>()"></select>
+        </div>
+
+        <div class="mb-3">
+            <label asp-for="OpeningDeposit" class="form-label"></label>
+            <input asp-for="OpeningDeposit" class="form-control" />
+            <small class="text-muted">Savings minimum: R200, Cheque minimum: R500</small>
+        </div>
+
+        <div class="d-flex gap-2">
+            <button class="btn btn-primary" type="submit">Open</button>
+            <a class="btn btn-outline-secondary" asp-controller="Accounts" asp-action="Index" asp-route-personId="@Model.ClientCode">Back to Accounts</a>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

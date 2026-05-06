@@ -1,0 +1,34 @@
+@{
+    ViewData["Title"] = "About";
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-wrap">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">About</li>
+    </ol>
+</nav>
+
+<div class="surface-panel">
+    <h1 class="page-title">About PTPBank</h1>
+    <p>PTPBank is a comprehensive banking management system designed to streamline core retail banking workflows in a clean, maintainable architecture.</p>
+
+    <h2 class="section-heading mt-4 mb-3">What PTPBank Delivers</h2>
+    <ul>
+        <li>Centralized <strong>Person</strong> records with robust input validation.</li>
+        <li>Structured <strong>Account</strong> management for Savings and Cheque products.</li>
+        <li>Reliable <strong>Transaction</strong> processing with integrity checks and audit-friendly flows.</li>
+    </ul>
+
+    <h2 class="section-heading mt-4 mb-3">Technology Stack</h2>
+    <ul>
+        <li>.NET Core 8 and ASP.NET Core MVC</li>
+        <li>Entity Framework Core</li>
+        <li>SQL Server</li>
+        <li>Bootstrap 5 + jQuery UI</li>
+        <li>FluentValidation</li>
+    </ul>
+
+    <h2 class="section-heading mt-4 mb-3">Architecture &amp; Patterns</h2>
+    <p class="mb-0">The solution follows layered architecture principles with Repository, Unit of Work, Service Layer, DTO, and Factory patterns. This keeps business rules centralized, preserves data integrity, and supports long-term maintainability.</p>
+</div>

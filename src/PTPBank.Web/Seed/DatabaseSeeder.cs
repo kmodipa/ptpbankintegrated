@@ -1,9 +1,7 @@
 using PTPBank.Domain.Enums;
 using PTPBank.Web.Data;
-using PTPBank.Web.Data.Identity;
 using PTPBank.Web.Models.Requests;
 using PTPBank.Web.Services;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
 namespace PTPBank.Web.Seed;
@@ -25,8 +23,6 @@ public static class DatabaseSeeder
         {
             logger.LogWarning(ex, "Database migration failed during startup seeding.");
         }
-
-        await SeedDefaultAdminUserAsync(scope.ServiceProvider, configuration, logger);
 
         if (!configuration.GetValue<bool>("SeedData:Enabled"))
         {
@@ -72,38 +68,6 @@ public static class DatabaseSeeder
         catch (Exception ex)
         {
             logger.LogWarning(ex, "Sample data seeding skipped because database is not ready or already constrained.");
-        }
-    }
-
-    private static async Task SeedDefaultAdminUserAsync(IServiceProvider serviceProvider, IConfiguration configuration, ILogger logger)
-    {
-        var userManager = serviceProvider.GetRequiredService<UserManager<ApplicationUser>>();
-
-        var adminEmail = configuration["Identity:AdminUser:Email"] ?? "admin@ptpbank.com";
-        var adminPassword = configuration["Identity:AdminUser:Password"] ?? "Admin@123";
-
-        var existingAdmin = await userManager.FindByEmailAsync(adminEmail);
-        if (existingAdmin is not null)
-        {
-            return;
-        }
-
-        // Authentication flow note:
-        // 1) Seed the default admin account for first-time access.
-        // 2) User signs in via /Account/Login using seeded credentials.
-        // 3) Identity cookie is issued and protected pages are unlocked.
-        var adminUser = new ApplicationUser
-        {
-            UserName = adminEmail,
-            Email = adminEmail,
-            FullName = "PTPBank Administrator",
-            EmailConfirmed = true
-        };
-
-        var result = await userManager.CreateAsync(adminUser, adminPassword);
-        if (!result.Succeeded)
-        {
-            logger.LogWarning("Default admin user could not be seeded: {Errors}", string.Join("; ", result.Errors.Select(e => e.Description)));
         }
     }
 }

@@ -1,0 +1,33 @@
+@{
+    ViewData["Title"] = "Home";
+}
+
+<section class="hero-card">
+    <h1 class="display-5 fw-bold mb-3">Welcome to PTPBank</h1>
+    <p class="lead mb-4">Welcome to PTPBank - Your trusted banking management system. Manage persons, accounts, and transactions with ease.</p>
+    <a class="btn btn-light btn-lg fw-semibold" asp-controller="Persons" asp-action="Index">Get Started</a>
+</section>
+
+<section class="surface-panel">
+    <h2 class="section-heading mb-3">Key Features</h2>
+    <div class="row g-3">
+        <div class="col-md-4">
+            <div class="feature-card">
+                <h5>Person Management</h5>
+                <p class="mb-0 text-muted">Capture, update, and manage person profiles with strong validation and clean data handling.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <h5>Account Management</h5>
+                <p class="mb-0 text-muted">Open and manage Savings &amp; Cheque accounts, including status lifecycle and minimum deposit rules.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="feature-card">
+                <h5>Transaction Processing</h5>
+                <p class="mb-0 text-muted">Post debit and credit transactions with secure validations and real-time balance visibility.</p>
+            </div>
+        </div>
+    </div>
+</section>
