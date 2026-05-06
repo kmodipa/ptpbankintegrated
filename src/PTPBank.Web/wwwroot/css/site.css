@@ -1,0 +1,180 @@
+:root {
+    --primary: #4d3aa9;
+    --primary-dark: #35277d;
+    --primary-light: #f1eeff;
+    --secondary: #4fc4bf;
+    --secondary-dark: #2d9d98;
+    --neutral: #1f2937;
+    --neutral-light: #6b7280;
+    --background: #f5f7fb;
+    --surface: #ffffff;
+    --border: #e5e7eb;
+    --gradient-main: linear-gradient(105deg, var(--primary-dark) 0%, var(--primary) 45%, var(--secondary) 100%);
+    --gradient-soft: linear-gradient(135deg, rgba(53, 39, 125, 0.08), rgba(79, 196, 191, 0.12));
+}
+
+html,
+body {
+    min-height: 100%;
+    background: var(--background);
+    color: var(--neutral);
+    font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+main {
+    flex: 1;
+}
+
+.app-navbar {
+    background: var(--gradient-main);
+    min-height: 76px;
+    box-shadow: 0 10px 26px rgba(53, 39, 125, 0.2);
+}
+
+.brand-logo {
+    height: 44px;
+    width: auto;
+}
+
+.navbar-toggler {
+    border-color: rgba(255, 255, 255, 0.35);
+}
+
+.navbar-toggler-icon {
+    filter: invert(1);
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+    font-weight: 500;
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem !important;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #ffffff !important;
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.hero-card {
+    background: var(--gradient-main);
+    color: #fff;
+    border-radius: 18px;
+    padding: 2.5rem;
+    box-shadow: 0 16px 35px rgba(53, 39, 125, 0.25);
+    margin-bottom: 1.5rem;
+}
+
+.hero-card .lead {
+    color: rgba(255, 255, 255, 0.94);
+}
+
+.surface-panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.section-heading {
+    background: var(--gradient-soft);
+    border-left: 5px solid var(--secondary-dark);
+    border-radius: 10px;
+    padding: 0.8rem 1rem;
+    font-weight: 700;
+}
+
+.feature-card {
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem;
+    height: 100%;
+    background: #fff;
+}
+
+.breadcrumb-wrap {
+    font-size: 0.92rem;
+    margin-bottom: 1rem;
+}
+
+.breadcrumb {
+    margin-bottom: 0;
+}
+
+.breadcrumb-item + .breadcrumb-item::before {
+    color: var(--neutral-light);
+}
+
+.form-panel {
+    max-width: 760px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.page-title {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 16px;
+}
+
+.app-table thead th {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    color: var(--neutral-light);
+    letter-spacing: 0.03em;
+}
+
+.app-table tbody tr:nth-child(even) {
+    background: var(--primary-light);
+}
+
+.form-control:focus,
+.form-select:focus {
+    box-shadow: 0 0 0 0.2rem rgba(77, 58, 169, 0.15);
+    border-color: var(--primary);
+}
+
+.btn-primary {
+    background: linear-gradient(100deg, var(--primary) 0%, var(--secondary-dark) 100%);
+    border: none;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background: linear-gradient(100deg, var(--primary-dark) 0%, var(--secondary-dark) 100%);
+}
+
+.contact-card {
+    border-radius: 14px;
+    background: var(--gradient-soft);
+    border: 1px solid var(--border);
+    padding: 1.2rem;
+}
+
+.contact-link {
+    color: var(--primary-dark);
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.contact-link:hover {
+    text-decoration: underline;
+}
+
+.app-footer {
+    background: #ffffff;
+    border-top: 1px solid var(--border);
+    color: var(--neutral-light);
+}
+
+.text-danger {
+    font-size: 0.85rem;
+}

@@ -1,0 +1,50 @@
+@page
+@model PTPBank.Web.Pages.ContactModel
+@{
+    ViewData["Title"] = "Contact";
+}
+
+<nav aria-label="breadcrumb" class="breadcrumb-wrap">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a asp-page="/Index">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Contact</li>
+    </ol>
+</nav>
+
+<div class="surface-panel">
+    <h1 class="page-title">Contact PTPBank</h1>
+    <p>Our team is available to support platform queries, implementation guidance, and operational assistance.</p>
+
+    <div class="row g-3 mt-2">
+        <div class="col-md-6">
+            <div class="contact-card h-100">
+                <h5 class="mb-3">Contact Information</h5>
+                <p class="mb-2">
+                    <i class="fa-solid fa-envelope me-2 text-primary"></i>
+                    <a class="contact-link" href="mailto:info@ptpbank.com">info@ptpbank.com</a>
+                </p>
+                <p class="mb-2">
+                    <i class="fa-solid fa-phone me-2 text-primary"></i>
+                    +27 11 555 1234
+                </p>
+                <p class="mb-0">
+                    <i class="fa-solid fa-location-dot me-2 text-primary"></i>
+                    1 Banking Avenue, Johannesburg, South Africa
+                </p>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <div class="contact-card h-100">
+                <h5 class="mb-3">Professional Channels</h5>
+                <p class="mb-3">
+                    <i class="fa-brands fa-linkedin me-2" style="color:#0A66C2;"></i>
+                    <a class="contact-link" href="https://linkedin.com/company/ptpbank" target="_blank" rel="noopener noreferrer">linkedin.com/company/ptpbank</a>
+                </p>
+                <h6 class="fw-bold">Office Hours</h6>
+                <p class="mb-1">Monday - Friday: 08:00 - 17:00</p>
+                <p class="mb-0">Saturday: 09:00 - 13:00</p>
+            </div>
+        </div>
+    </div>
+</div>
